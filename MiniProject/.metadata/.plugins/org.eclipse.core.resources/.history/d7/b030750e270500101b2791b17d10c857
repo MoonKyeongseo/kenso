@@ -1,0 +1,11 @@
+package Building;
+
+import java.util.ArrayList;
+
+public class BuildingController {
+    BuildingDAO dao = new BuildingDAO();
+
+    public ArrayList<BuildingDTO> Con_list() {
+        return dao.list();
+    }
+}

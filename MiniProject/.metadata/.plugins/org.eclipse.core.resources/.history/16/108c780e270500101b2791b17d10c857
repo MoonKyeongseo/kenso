@@ -1,0 +1,30 @@
+package Building;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class BuildingMain {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		BuildingController control = new BuildingController();
+
+		System.out.println("[1] 지역 테이블 조회");
+		int input = sc.nextInt();
+
+		if (input == 1) {
+			System.out.println("나라이름");
+			System.out.println("NAME\tPRICE\tFEE\tT_PRICE");
+			ArrayList<BuildingDTO> result = control.Con_list();
+
+			for (int i = 0; i < result.size(); i++) {
+				System.out.println(result.get(i).getName() + "\t" + result.get(i).getPrice() + "\t"
+						+ result.get(i).getFee() + "\t" + result.get(i).getT_price());
+				
+			}
+		} else if (input == 2) {
+			System.out.println("ㅋㅋㅋ");
+		}
+		sc.close();
+	}
+	
+}

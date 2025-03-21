@@ -1,0 +1,31 @@
+package View;
+
+import java.util.Scanner;
+
+import Controller.SoundController;
+
+public class SoundMain {
+
+    public static void main(String[] args) {
+        
+        // Controller 호출하여 오디오 재생
+        SoundController controller = new SoundController();
+    
+        	//게임 첫 시작 시 효과음
+        	controller.playSound("C:/Users/a/OneDrive/바탕 화면/테마음악.wav");
+
+        	//랜드마크 건설 시 효과음
+        	controller.playSound("C:/Users/a/OneDrive/바탕 화면/랜드마크.wav");
+
+        	//턴 넘어갈 때 효과음
+        	controller.playSound("C:/Users/a/OneDrive/바탕 화면/마이턴.wav");
+
+        	//주사위 더블 
+        	controller.playSound("C:/Users/a/OneDrive/바탕 화면/주사위더블.wav");
+
+        	//패배, 게임종료
+        	controller.playSound("C:/Users/a/OneDrive/바탕 화면/게임종료.wav");
+
+
+    }
+}

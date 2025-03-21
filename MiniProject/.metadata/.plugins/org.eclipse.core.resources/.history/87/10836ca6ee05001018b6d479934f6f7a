@@ -1,0 +1,24 @@
+package Controller;
+
+import Model.SoundDAO;
+import Model.SoundDTO;
+
+public class SoundController {
+
+    private SoundDAO soundDAO;
+
+    // 생성자
+    public SoundController() {
+        soundDAO = new SoundDAO();
+    }
+
+    // 오디오 파일 재생 처리 메서드
+    public void playSound(String filePath) {
+        // DTO 생성
+        SoundDTO soundDTO = new SoundDTO(filePath);
+
+        // DAO를 통해 오디오 재생
+        soundDAO.playAudio(soundDTO);
+    }
+}
+

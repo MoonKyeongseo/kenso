@@ -1,0 +1,58 @@
+package Building;
+
+import java.sql.*;
+import java.util.ArrayList;
+
+public class BuildingDAO {
+    private Connection conn = null;
+    private PreparedStatement psmt = null;
+    private ResultSet rs = null;
+
+    public void getConn() {
+        try {
+        	Class.forName("oracle.jdbc.driver.OracleDriver");
+			// DB연결에 필요한 설정값
+			String url = "jdbc:oracle:thin:@project-db-campus.smhrd.com:1523:xe";
+			String user = "hapjeong_24SW_DS_p1_3";
+			String pw = "smhrd3";
+			conn = DriverManager.getConnection(url, user, pw);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<BuildingDTO> list() {
+        ArrayList<BuildingDTO> resultList = new ArrayList<>();
+        getConn();
+
+        String sql = "SELECT * FROM BUILDING_INFO";
+
+        try {
+            psmt = conn.prepareStatement(sql);
+            rs = psmt.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                int price = rs.getInt("price");
+                int fee = rs.getInt("fee");
+                int t_price = rs.getInt("t_price");
+                resultList.add(new BuildingDTO(name, price, fee, t_price));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return resultList;
+    }
+
+    public void close() {
+        try {
+            if (rs != null) rs.close();
+            if (psmt != null) psmt.close();
+            if (conn != null) conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

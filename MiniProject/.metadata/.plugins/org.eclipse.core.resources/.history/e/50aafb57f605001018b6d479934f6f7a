@@ -1,0 +1,24 @@
+package Model;
+
+import java.io.File;
+import javax.sound.sampled.*;
+
+public class SoundDAO {
+    public void playAudio(SoundDTO soundDTO) {
+        File audioFile = new File(soundDTO.getFilePath());
+        if (!audioFile.exists()) {
+            System.out.println("❌ 파일을 찾을 수 없습니다: " + soundDTO.getFilePath());
+            return;
+        }
+
+        try (AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile)) {
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+
+            Thread.sleep(clip.getMicrosecondLength() / 1000); // 재생 시간만큼 대기
+        } catch (Exception e) {
+            System.err.println("🔴 오디오 재생 중 오류 발생: " + e.getMessage());
+        }
+    }
+}

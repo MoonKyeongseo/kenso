@@ -1,0 +1,16 @@
+package Controller;
+
+import Model.SoundDAO;
+import Model.SoundDTO;
+
+public class SoundController {
+    private final SoundDAO soundDAO;
+
+    public SoundController() {
+        this.soundDAO = new SoundDAO();
+    }
+
+    public void playSound(String filePath) {
+        soundDAO.playAudio(new SoundDTO(filePath));
+    }
+}
